@@ -1,15 +1,15 @@
 sealed trait Offers {
-  def calculateOffer(items: Seq[Item]): BigDecimal
+  def calculatePrice(items: Seq[Item]): BigDecimal
 }
 
 object NoOffer extends Offers {
-  override def calculateOffer(items: Seq[Item]): BigDecimal = {
+  override def calculatePrice(items: Seq[Item]): BigDecimal = {
     items.map(_.price).sum
   }
 }
 
 object SimpleOffer extends Offers {
-  override def calculateOffer(items: Seq[Item]): BigDecimal = {
+  override def calculatePrice(items: Seq[Item]): BigDecimal = {
     val group = items.groupBy(identity).mapValues(_.size)
 
     val applyOffer: Map[Item, Int] = group.map(x => {
